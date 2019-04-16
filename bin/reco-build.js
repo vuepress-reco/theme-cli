@@ -1,29 +1,70 @@
 #! /usr/bin/env node
 
-import package from '../package.json'
-
 const program = require('commander');
 const download = require('download-git-repo');
 const chalk = require('chalk');
 const ora = require('ora');
-const inquirer = require('inquirer');
+const fs = require('fs');
+
+const handleInquirer = require('./inquirer.js')
 
 program
-  .version(package.version)
-  .option('-i, init [name]', '初始化reco-build项目')
-  .option('-v, version [version]', '初始化reco-build项目')
+  .version('0.0.1')
+  .option('-i, init [name]', '初始化 vuepress-theme-reco 主题博客')
   .parse(process.argv);
 
+program.on('--help', () => {
+  console.log('  Examples:')
+  console.log()
+  console.log(chalk.gray('    # create a new project with an official template'))
+  console.log('    $ reco-cli init my-blog')
+  console.log()
+})
+
 if (program.init) {
-  const spinner = ora('正在从github下载reco-build').start();
-  download('recoluan/vuepress-theme-reco', program.init, function (err) {
-    if(!err){
-      // 可以输出一些项目成功的信息
-      console.info(chalk.blueBright('下载成功'));
-    }else{
-      // 可以输出一些项目失败的信息
-      console.info(chalk.redBright('下载失败'));
-      console.info(err)
-    }
-  })
+  handleInquirer()
+    .then(res => {
+      const gitBranch = `recoluan/vuepress-theme-reco-demo#demo/${res}`
+      const spinner = ora().start();
+      console.info(chalk.blue('[1/2] load file from git'));
+      download(gitBranch, program.init, function (err) {
+        if(!err){
+          console.info(chalk.blue('[2/2] change package.json'));
+          changePackage().then(() => {
+            spinner.stop()
+            console.log()
+            console.info(chalk.greenBright('load success, enjoy it!'));
+            console.log()
+            console.log(chalk.gray('# inter your blog'))
+            console.log(`$ cd ${program.init}`)
+            console.log(chalk.gray('# install package'))
+            console.log('$ npm install')
+          })
+        }else{
+          console.info(chalk.redBright('load fail!'));
+          console.info(err)
+          spinner.stop()
+        }
+      })
+    })
+    .catch(err => {
+      console.info(chalk.redBright(err));
+    })
 }  
+
+function changePackage () {
+  return new Promise((resolve) => {
+    fs.readFile(`${process.cwd()}/${program.init}/package.json`, (err, data) => {
+      if (err) throw err;
+      let _data = JSON.parse(data.toString())
+      _data.name = program.init
+      _data.version = '1.0.0'
+      let str = JSON.stringify(_data, null, 4);
+      fs.writeFile(`${process.cwd()}/${program.init}/package.json`, str, function (err) {
+        resolve()
+        if (err) throw err
+      })
+    })
+  })
+}
+
