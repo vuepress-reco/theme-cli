@@ -7,6 +7,7 @@ Blog generation tool for vuepress-theme-reco
 |Version|VuePress|VuePress-theme-reco|
 |-|:-:|:-:|
 |0.x|0.x|0.x|
+|1.x|1.x|1.x|
 
 ## Experience
 
