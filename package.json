@@ -1,12 +1,16 @@
 {
   "name": "vuepress-theme-reco-cli",
-  "version": "0.0.1-alpha.12",
+  "version": "0.0.1-alpha.13",
   "description": "a cli for vuepress-theme-reco",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "bin": {
     "reco-cli": "./bin/reco-build.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/recoluan/vuepress-theme-reco.git"
   },
   "keywords": [
     "vuepress",
@@ -16,6 +20,10 @@
   ],
   "author": "reco_luan",
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/recoluan/vuepress-theme-reco-cli/issues"
+  },
+  "homepage": "https://recoluan.gitlab.io/vuepress-theme-reco-doc/",
   "dependencies": {
     "chalk": "^2.4.2",
     "commander": "^2.20.0",
