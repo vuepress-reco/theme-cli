@@ -5,7 +5,7 @@ const questions = [
     type: 'list',
     name: 'version',
     message: 'Which version you need?',
-    choices: ['0.x', '1.x'],
+    choices: ['1.x', '0.x'],
     filter: function(val) {
       return val.toLowerCase();
     }

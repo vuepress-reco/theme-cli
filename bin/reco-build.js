@@ -26,18 +26,18 @@ if (program.init) {
     .then(res => {
       const gitBranch = `recoluan/vuepress-theme-reco-demo#demo/${res}`
       const spinner = ora().start();
-      console.info(chalk.blue('[1/2] load file from git'));
+      console.info(chalk.blue('[1/2] Load file from git'));
       download(gitBranch, program.init, function (err) {
         if(!err){
-          console.info(chalk.blue('[2/2] change package.json'));
+          console.info(chalk.blue('[2/2] Edit package.json'));
           changePackage().then(() => {
             spinner.stop()
             console.log()
-            console.info(chalk.greenBright('load success, enjoy it!'));
+            console.info(chalk.greenBright('Load successful, enjoy it!'));
             console.log()
-            console.log(chalk.gray('# inter your blog'))
+            console.log(chalk.gray('# Inter your blog'))
             console.log(`$ cd ${program.init}`)
-            console.log(chalk.gray('# install package'))
+            console.log(chalk.gray('# Install package'))
             console.log('$ npm install')
           })
         }else{
