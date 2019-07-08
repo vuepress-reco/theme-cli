@@ -1,6 +1,6 @@
 {
   "name": "vuepress-theme-reco-cli",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "a cli for vuepress-theme-reco",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
