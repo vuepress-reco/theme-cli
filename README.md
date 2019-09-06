@@ -11,10 +11,16 @@ Blog generation tool for vuepress-theme-reco
 
 ## Experience
 
-```bash
-# create
+**npx**
+
+```
 npx @vuepress-reco/theme-cli init my-blog
-# or
+```
+
+**npm**
+
+```bash
+# init
 npm install @vuepress-reco/theme-cli -g
 theme-cli init my-blog
 
@@ -29,22 +35,13 @@ npm run dev
 npm run build
 ```
 
-**if yarn**
+**yarn**
 
 ```bash
-# create
-npx @vuepress-reco/theme-cli init my-blog
-#or
+# init
 yarn global add @vuepress-reco/theme-cli
 theme-cli init my-blog
 
 # install
 cd my-blog
 yarn install
-
-# run
-yarn dev
-
-# build
-yarn build
-```
