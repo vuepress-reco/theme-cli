@@ -1,4 +1,4 @@
-# vuepress-theme-reco-cli
+# @vuepress-reco/theme-cli
 
 Blog generation tool for vuepress-theme-reco 
 
