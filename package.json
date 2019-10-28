@@ -1,8 +1,10 @@
 {
   "name": "@vuepress-reco/theme-cli",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A cli for vuepress-theme-reco",
   "scripts": {
+    "tsc": "tsc ./src/*.ts --outDir ./bin/",
+    "eslint": "eslint src --ext .ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "bin": {
@@ -31,5 +33,19 @@
     "download-git-repo": "^1.1.0",
     "inquirer": "^6.3.1",
     "ora": "^3.4.0"
+  },
+  "devDependencies": {
+    "@types/events": "^3.0.0",
+    "@types/glob": "^7.1.1",
+    "@types/json-schema": "^7.0.3",
+    "@types/minimatch": "^3.0.3",
+    "@types/node": "^12.11.7",
+    "@types/unist": "^2.0.3",
+    "@types/vfile": "^3.0.2",
+    "@types/vfile-message": "^1.0.1",
+    "@typescript-eslint/parser": "^2.5.0",
+    "eslint": "^6.6.0",
+    "eslint-plugin-typescript": "^0.14.0",
+    "typescript": "^3.6.3"
   }
 }

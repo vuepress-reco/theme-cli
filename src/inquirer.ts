@@ -1,4 +1,4 @@
-const inquirer = require('inquirer');
+const inquirer = require('inquirer')
 
 const questions = [
   {
@@ -21,23 +21,21 @@ const questions = [
     type: 'list',
     message: `What style do you want your home page to be?(Select afternoon-grocery, if you want to download reco_luan's '午后南杂')`,
     choices: ['blog', 'doc', 'afternoon-grocery'],
-    filter: function(val) {
-      return val.toLowerCase();
+    filter: function (val: any) {
+      return val.toLowerCase()
     }
   }
 ]
 
-const handleInquirer = function () {
+module.exports = function handleInquirer () {
   return new Promise((resolve, reject) => {
     inquirer
       .prompt(questions)
-      .then(answers => {
+      .then((answers: any) => {
         resolve(answers)
       })
-      .catch(err => {
+      .catch((err: any) => {
         reject(err)
       })
   })
 }
-
-module.exports = handleInquirer
