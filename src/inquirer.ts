@@ -1,6 +1,19 @@
 const inquirer = require('inquirer')
 
-const questions = [
+const isNewDirQuestions = {
+  name: 'isNewDir',
+  type: 'confirm',
+  message: `Whether to create a new directory?`,
+  default: 'Y'
+}
+
+const newDirQuestion = {
+  name: 'newDir',
+  type: 'input',
+  message: `What's the name of new directory?`
+}
+
+let questions = [
   {
     name: 'title',
     type: 'input',
@@ -27,12 +40,19 @@ const questions = [
   }
 ]
 
-module.exports = function handleInquirer () {
+module.exports = async function handleInquirer () {
+  const { isNewDir } = await inquirer.prompt(isNewDirQuestions)
+  if (isNewDir) {
+    questions = [
+      newDirQuestion,
+      ...questions
+    ]
+  }
   return new Promise((resolve, reject) => {
     inquirer
       .prompt(questions)
       .then((answers: any) => {
-        resolve(answers)
+        resolve({ isNewDir, ...answers })
       })
       .catch((err: any) => {
         reject(err)

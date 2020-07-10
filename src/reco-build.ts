@@ -4,7 +4,9 @@ interface Choices {
   title: string,
   author: string,
   description: string,
-  style: string
+  style: string,
+  isNewDir?: string,
+  newDir?: string
 }
 
 interface Spinner {
@@ -40,13 +42,16 @@ program.on('--help', () => {
 })
 
 if (program.init) {
+  console.log(111, program.init)
   handleInquirer()
     .then((choices: Choices) => {
-      const { style } = choices
+      const { style, isNewDir, newDir } = choices
+      program.init = isNewDir ? newDir : './'
       stepNum = style === 'afternoon-grocery' ? 1 : style === 'doc' ? 2 : 3
       const branchName = style === 'afternoon-grocery' ? 'afternoon-grocery' : '1.x'
       const gitBranch = `recoluan/vuepress-theme-reco-demo#demo/${branchName}`
       spinner.start(chalk.blue(`[${currentStep}/${stepNum}] Load file from git`))
+      console.log(choices)
 
       download(gitBranch, program.init, function (err: Object) {
         if (!err) {
