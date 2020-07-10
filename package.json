@@ -1,6 +1,6 @@
 {
   "name": "@vuepress-reco/theme-cli",
-  "version": "1.0.2",
+  "version": "1.0.6",
   "description": "A cli for vuepress-theme-reco",
   "scripts": {
     "tsc": "tsc ./src/*.ts --outDir ./bin/",
@@ -10,6 +10,9 @@
   "bin": {
     "theme-cli": "./bin/reco-build.js"
   },
+  "files": [
+    "bin/"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/recoluan/vuepress-theme-reco.git"

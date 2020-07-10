@@ -40,19 +40,26 @@ let questions = [
   }
 ]
 
-module.exports = async function handleInquirer () {
-  const { isNewDir } = await inquirer.prompt(isNewDirQuestions)
-  if (isNewDir) {
-    questions = [
-      newDirQuestion,
-      ...questions
-    ]
+module.exports = async function handleInquirer (isString: boolean, dir: string) {
+  let isNewDir = false
+  let newDir = './'
+  if (!isString) {
+    isNewDir = (await inquirer.prompt(isNewDirQuestions)).isNewDir
+    if (isNewDir) {
+      questions = [
+        newDirQuestion,
+        ...questions
+      ]
+    }
+  } else {
+    newDir = dir
   }
+
   return new Promise((resolve, reject) => {
     inquirer
       .prompt(questions)
       .then((answers: any) => {
-        resolve({ isNewDir, ...answers })
+        resolve({ isNewDir, newDir, ...answers })
       })
       .catch((err: any) => {
         reject(err)

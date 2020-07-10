@@ -42,16 +42,15 @@ program.on('--help', () => {
 })
 
 if (program.init) {
-  console.log(111, program.init)
-  handleInquirer()
+  const isString = typeof program.init === 'string'
+  handleInquirer(isString, program.init)
     .then((choices: Choices) => {
-      const { style, isNewDir, newDir } = choices
-      program.init = isNewDir ? newDir : './'
+      const { style, newDir } = choices
+      program.init = newDir
       stepNum = style === 'afternoon-grocery' ? 1 : style === 'doc' ? 2 : 3
       const branchName = style === 'afternoon-grocery' ? 'afternoon-grocery' : '1.x'
       const gitBranch = `recoluan/vuepress-theme-reco-demo#demo/${branchName}`
       spinner.start(chalk.blue(`[${currentStep}/${stepNum}] Load file from git`))
-      console.log(choices)
 
       download(gitBranch, program.init, function (err: Object) {
         if (!err) {
@@ -93,10 +92,14 @@ function handleEnd () {
   console.log()
   console.info(chalk.greenBright('Load successful, enjoy it!'))
   console.log()
-  console.log(chalk.gray('# Inter your blog'))
-  console.log(`$ cd ${program.init}`)
+
+  if (program.init !== './') {
+    console.log(chalk.gray('# Inter your blog'))
+    console.log(`$ cd ${program.init}`)
+  }
+
   console.log(chalk.gray('# Install package'))
-  console.log('$ npm install')
+  console.log('$ yarn & npm install')
 }
 
 function changePackage (choices: Choices) {
@@ -106,7 +109,7 @@ function changePackage (choices: Choices) {
     fs.readFile(`${process.cwd()}/${program.init}/package.json`, (err: Object, data: Object) => {
       if (err) throw err
       const _data = JSON.parse(data.toString())
-      _data.name = program.init
+      _data.name = choices.title
       _data.description = choices.description
       _data.version = '1.0.0'
       const str = JSON.stringify(_data, null, 2)
@@ -127,15 +130,16 @@ function changePackage (choices: Choices) {
 function changeConfig (choices: Choices) {
   spinner.start(chalk.blue(`[${currentStep}/${stepNum}] Edit config.js`))
   return new Promise((resolve) => {
-    const _data = require(`${process.cwd()}/${program.init}/docs/.vuepress/config.js`)
+    const _data = require(`${process.cwd()}/${program.init}/.vuepress/config.js`)
     _data.themeConfig.type = 'blog'
     _data.themeConfig.author = choices.author
     _data.title = choices.title
     _data.description = choices.description
     const str = `module.exports = ${JSON.stringify(_data, null, 2)}`
-    fs.writeFile(`${process.cwd()}/${program.init}/docs/.vuepress/config.js`, str, function (err: Object) {
+    fs.writeFile(`${process.cwd()}/${program.init}/.vuepress/config.js`, str, function (err: Object) {
       if (!err) {
         spinner.succeed(chalk.blue(`[${currentStep}/${stepNum}] Edit config.js`))
+        currentStep++
         resolve()
       } else {
         spinner.fail(chalk.blue(`[${currentStep}/${stepNum}] Edit config.js`))
