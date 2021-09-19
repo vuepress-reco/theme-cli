@@ -25,3 +25,9 @@ theme-cli init
 yarn global add @vuepress-reco/theme-cli
 theme-cli init
 ```
+
+**test**
+
+```bash
+node ./bin/reco-build.js init
+```

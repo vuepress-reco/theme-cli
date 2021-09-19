@@ -47,8 +47,8 @@ if (program.init) {
     .then((choices: Choices) => {
       const { style, newDir } = choices
       program.init = newDir
-      stepNum = style === 'afternoon-grocery' ? 1 : style === 'doc' ? 2 : 3
-      const branchName = style === 'afternoon-grocery' ? 'afternoon-grocery' : '1.x'
+      stepNum = style === '2.x' ? 1 : style === 'doc' ? 2 : 3
+      const branchName = style === '2.x' ? '2.x' : '1.x'
       const gitBranch = `recoluan/vuepress-theme-reco-demo#demo/${branchName}`
       spinner.start(chalk.blue(`[${currentStep}/${stepNum}] Load file from git`))
 
@@ -70,7 +70,7 @@ if (program.init) {
 }
 
 function handleDownload (choices: Choices) {
-  if (choices.style === 'afternoon-grocery') {
+  if (choices.style === '2.x') {
     handleEnd()
     return
   }
