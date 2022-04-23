@@ -1,9 +1,9 @@
 {
   "name": "@vuepress-reco/theme-cli",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "A cli for vuepress-theme-reco",
   "scripts": {
-    "tsc": "tsc ./src/*.ts --outDir ./bin/",
+    "build": "tsc ./src/*.ts --outDir ./bin/",
     "eslint": "eslint src --ext .ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

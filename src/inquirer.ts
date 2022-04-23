@@ -32,8 +32,8 @@ let questions = [
   {
     name: 'style',
     type: 'list',
-    message: `What style do you want your home page to be?(The 2.x version is the alpha version)`,
-    choices: ['blog', 'doc', '2.x'],
+    message: `What style do you want your home page to be?(The 2.x version is the beta version)`,
+    choices: ['blog style for 1.x', 'doc style for 1.x', '2.x'],
     filter: function (val: any) {
       return val.toLowerCase()
     }

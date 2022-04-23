@@ -47,7 +47,7 @@ if (program.init) {
     .then((choices: Choices) => {
       const { style, newDir } = choices
       program.init = newDir
-      stepNum = style === '2.x' ? 1 : style === 'doc' ? 2 : 3
+      stepNum = style === '2.x' ? 1 : style === 'doc style for 1.x' ? 2 : 3
       const branchName = style === '2.x' ? '2.x' : '1.x'
       const gitBranch = `recoluan/vuepress-theme-reco-demo#demo/${branchName}`
       spinner.start(chalk.blue(`[${currentStep}/${stepNum}] Load file from git`))
@@ -75,7 +75,7 @@ function handleDownload (choices: Choices) {
     return
   }
 
-  if (choices.style === 'doc') {
+  if (choices.style === 'doc style for 1.x') {
     changePackage(choices).then(() => {
       handleEnd()
     })
